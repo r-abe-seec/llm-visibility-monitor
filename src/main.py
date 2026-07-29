@@ -3,7 +3,7 @@ from fastapi import FastAPI, HTTPException
 from src.application.batch_prompt_runner import BatchPromptRunner
 from src.config import settings
 from src.models.prompt_run import PromptRunRequest, PromptRunResult
-from src.repositories.json_result_repository import JsonResultRepository
+from src.factories.repository_factory import RepositoryFactory
 from src.services.llm.factory import ProviderFactory
 from src.services.prompt_service import PromptService
 
@@ -14,7 +14,7 @@ app = FastAPI(
 )
 
 prompt_service = PromptService()
-result_repository = JsonResultRepository()
+result_repository = RepositoryFactory.create("json")
 
 @app.get("/")
 def root():
