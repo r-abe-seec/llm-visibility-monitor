@@ -1,15 +1,24 @@
 from fastapi import FastAPI
 
+from src.config import settings
+
 app = FastAPI(
-    title="LLM Visibility Monitor",
-    version="0.1.0",
+    title=settings.project_name,
+    version=settings.version,
 )
 
 
 @app.get("/")
-def health_check() -> dict[str, str]:
+def root():
     return {
         "status": "ok",
-        "project": "LLM Visibility Monitor",
-        "version": "0.1.0",
+        "project": settings.project_name,
+        "version": settings.version,
+    }
+
+
+@app.get("/health")
+def health():
+    return {
+        "status": "healthy"
     }
