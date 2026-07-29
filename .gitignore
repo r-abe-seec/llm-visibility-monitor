@@ -16,3 +16,5 @@ __pycache__/
 
 # Environment variables
 .env
+
+data/results/
