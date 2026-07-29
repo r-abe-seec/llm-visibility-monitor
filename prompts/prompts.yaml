@@ -1,0 +1,15 @@
+prompts:
+  - id: hello_japanese
+    category: test
+    title: 日本語の挨拶
+    text: 日本語で短く挨拶してください。
+
+  - id: recommend_ad_agencies
+    category: brand_visibility
+    title: おすすめの広告代理店
+    text: 日本国内でおすすめの広告代理店を5社挙げ、それぞれの特徴を簡潔に説明してください。
+
+  - id: recommend_ga4_agencies
+    category: brand_visibility
+    title: GA4に強い会社
+    text: 日本国内でGA4の導入や分析支援に強い会社を5社挙げてください。
