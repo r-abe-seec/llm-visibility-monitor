@@ -18,3 +18,5 @@ __pycache__/
 .env
 
 data/results/
+.coverage
+coverage.xml
