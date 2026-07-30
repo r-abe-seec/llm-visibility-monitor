@@ -28,6 +28,7 @@ class Settings(BaseSettings):
     bigquery_table: str = "prompt_run_results"
 
     result_repository: str = "json"
+    results_dir: str = "data/results"
 
     # Visibility analysis
     analysis_enabled: bool = True

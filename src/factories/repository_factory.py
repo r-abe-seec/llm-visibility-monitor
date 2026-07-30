@@ -20,7 +20,7 @@ class RepositoryFactory:
                 return ConsoleResultRepository()
 
             case "json":
-                return JsonResultRepository()
+                return JsonResultRepository(settings.results_dir)
 
             case "bigquery":
                 if settings.gcp_project_id is None:

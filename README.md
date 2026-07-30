@@ -22,6 +22,7 @@ The project helps marketers, SEO professionals, and developers measure how brand
   - BigQuery
 - Store execution results in BigQuery
 - Brand visibility analysis (mention detection, ranking, visibility score, share of voice)
+- Result history API (past runs and brand visibility over time)
 - FastAPI REST API
 - Docker & Docker Compose support
 - Environment-based configuration
@@ -264,11 +265,11 @@ This project uses:
 - ✅ Docker Compose
 - ✅ Gemini provider
 - ✅ Perplexity provider
+- ✅ Result history API
 
 ### Planned
 
 - Azure OpenAI provider
-- Result history API
 - Looker Studio dashboard
 - Cloud Run deployment guide
 
