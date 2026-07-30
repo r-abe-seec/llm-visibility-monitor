@@ -43,6 +43,12 @@ class Settings(BaseSettings):
     schedule_providers: str = "openai"
     schedule_prompt_ids: str = ""
 
+    # Alerts (disabled by default)
+    alert_enabled: bool = False
+    alert_score_drop_threshold: float = 20.0
+    slack_webhook_url: str | None = None
+    google_chat_webhook_url: str | None = None
+
     # Visibility analysis
     analysis_enabled: bool = True
     sentiment_enabled: bool = True

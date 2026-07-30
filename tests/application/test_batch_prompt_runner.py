@@ -107,3 +107,25 @@ def test_sentiment_disabled(monkeypatch):
     assert all(m.sentiment is None for m in item.analysis.brands)
     # only one call was made (no sentiment prompt)
     assert provider.replies == []
+
+
+def test_alerts_triggered_when_enabled(monkeypatch):
+    import src.application.batch_prompt_runner as runner_mod
+    from src.config import settings
+
+    monkeypatch.setattr(settings, "alert_enabled", True)
+
+    sent: list[str] = []
+
+    class _FakeAlertService:
+        def check_and_notify(self, run) -> None:
+            sent.append(run.run_id)
+
+    monkeypatch.setattr(runner_mod, "AlertService", lambda: _FakeAlertService())
+
+    provider = _FakeProvider(["1. 電通", '{"電通": "positive"}'])
+    monkeypatch.setattr(runner_module.ProviderFactory, "create", lambda name: provider)
+    repository = _CapturingRepository()
+
+    result = _make_runner(repository).run("fake", ["p1"])
+    assert sent == [result.run_id]

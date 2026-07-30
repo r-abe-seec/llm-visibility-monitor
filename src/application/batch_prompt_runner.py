@@ -6,6 +6,7 @@ from src.repositories.console_result_repository import (
     ConsoleResultRepository,
 )
 from src.repositories.result_repository import ResultRepository
+from src.services.alert_service import AlertService
 from src.services.analysis.analyzer import analyze_visibility
 from src.services.analysis.sentiment import judge_sentiments
 from src.services.llm.base import LLMProvider
@@ -70,6 +71,9 @@ class BatchPromptRunner:
         )
 
         self.result_repository.save(run_result)
+
+        if settings.alert_enabled:
+            AlertService().check_and_notify(run_result)
 
         return run_result
 
