@@ -276,10 +276,13 @@ This project uses:
 - ✅ Scheduled runs
 - ✅ Looker Studio dashboard guide
 - ✅ Azure OpenAI provider
+- ✅ Cloud Run deployment guide
 
 ### Planned
 
-- Cloud Run deployment guide
+- Visibility change alerts (Slack / email notification)
+- Prompt template generation per category
+- Materialized dashboard tables for large datasets
 
 ---
 
