@@ -32,6 +32,7 @@ class Settings(BaseSettings):
 
     # Visibility analysis
     analysis_enabled: bool = True
+    sentiment_enabled: bool = True
     brands_file: str = "prompts/brands.yaml"
 
     model_config = SettingsConfigDict(

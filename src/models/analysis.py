@@ -9,6 +9,7 @@ class BrandMention(BaseModel):
     first_position: int | None = None
     rank: int | None = None
     visibility_score: float
+    sentiment: str | None = None
 
 
 class VisibilityAnalysis(BaseModel):

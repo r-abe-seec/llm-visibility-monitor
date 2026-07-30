@@ -5,7 +5,7 @@ from src.models.prompt_run import PromptRunItem, PromptRunResult
 from src.services.analysis.comparison import build_comparison_report
 
 
-def _mention(brand, is_target, mentioned, score, rank=None):
+def _mention(brand, is_target, mentioned, score, rank=None, sentiment=None):
     return BrandMention(
         brand=brand,
         is_target=is_target,
@@ -13,6 +13,7 @@ def _mention(brand, is_target, mentioned, score, rank=None):
         count=1 if mentioned else 0,
         rank=rank,
         visibility_score=score,
+        sentiment=sentiment,
     )
 
 
@@ -102,3 +103,26 @@ def test_runs_without_analysis_are_skipped():
     report = build_comparison_report([bare])
     assert report.runs_analyzed == 0
     assert report.brands == []
+
+
+def test_positive_rate_aggregation():
+    runs = [
+        _run(
+            "s1",
+            "openai",
+            [_mention("電通", True, True, 100.0, rank=1, sentiment="positive")],
+        ),
+        _run(
+            "s2",
+            "openai",
+            [_mention("電通", True, True, 80.0, sentiment="neutral")],
+        ),
+    ]
+    report = build_comparison_report(runs)
+    dentsu = report.brands[0]
+    assert dentsu.positive_rate == 0.5
+
+
+def test_positive_rate_none_without_sentiment():
+    report = build_comparison_report(RUNS)
+    assert all(b.positive_rate is None for b in report.brands)

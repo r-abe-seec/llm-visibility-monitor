@@ -22,6 +22,7 @@ The project helps marketers, SEO professionals, and developers measure how brand
   - BigQuery
 - Store execution results in BigQuery
 - Brand visibility analysis (mention detection, ranking, visibility score, share of voice)
+- Sentiment analysis of brand mentions (judged by the executing LLM)
 - Result history API (past runs and brand visibility over time)
 - Competitive comparison report (target vs competitor visibility)
 - FastAPI REST API
@@ -268,6 +269,7 @@ This project uses:
 - ✅ Perplexity provider
 - ✅ Result history API
 - ✅ Competitive comparison report
+- ✅ Sentiment analysis
 
 ### Planned
 

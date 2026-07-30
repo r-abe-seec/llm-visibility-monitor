@@ -20,6 +20,7 @@ def build_comparison_report(
     runs = [run for run in runs if any(item.analysis for item in run.results)]
 
     scores: dict[str, list[float]] = defaultdict(list)
+    sentiments: dict[str, list[str]] = defaultdict(list)
     ranks: dict[str, list[int]] = defaultdict(list)
     mentions: dict[str, int] = defaultdict(int)
     appearances: dict[str, int] = defaultdict(int)
@@ -48,6 +49,8 @@ def build_comparison_report(
                     name not in run_rank or mention.rank < run_rank[name]
                 ):
                     run_rank[name] = mention.rank
+                if mention.sentiment is not None:
+                    sentiments[name].append(mention.sentiment)
 
         for name, score in run_score.items():
             appearances[name] += 1
@@ -67,6 +70,11 @@ def build_comparison_report(
             best_rank=min(ranks[name]) if ranks[name] else None,
             average_rank=(
                 round(sum(ranks[name]) / len(ranks[name]), 2) if ranks[name] else None
+            ),
+            positive_rate=(
+                round(sentiments[name].count("positive") / len(sentiments[name]), 4)
+                if sentiments[name]
+                else None
             ),
         )
         for name in sorted(

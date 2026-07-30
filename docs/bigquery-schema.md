@@ -32,7 +32,7 @@ When a batch contains multiple prompts, one row is inserted for each prompt exec
 | citations | STRING (JSON) | Source URLs returned by the provider (e.g. Perplexity); empty for providers without citations |
 | target_score | FLOAT64 | Visibility score (0-100) of the target brand(s) |
 | share_of_voice | FLOAT64 | Target brand mention share among all tracked brands (0-1) |
-| analysis | STRING (JSON) | Full VisibilityAnalysis payload (per-brand mentions, ranks, scores) |
+| analysis | STRING (JSON) | Full VisibilityAnalysis payload (per-brand mentions, ranks, scores, sentiment) |
 | metadata | STRING (JSON) | Reserved for future use |
 
 The `target_score`, `share_of_voice`, and `analysis` columns are populated

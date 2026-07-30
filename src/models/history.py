@@ -30,6 +30,7 @@ class BrandComparison(BaseModel):
     average_score: float
     best_rank: int | None = None
     average_rank: float | None = None
+    positive_rate: float | None = None
 
 
 class ComparisonReport(BaseModel):

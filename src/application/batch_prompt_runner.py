@@ -1,3 +1,5 @@
+from src.config import settings
+from src.models.analysis import VisibilityAnalysis
 from src.models.brand import Brand
 from src.models.prompt_run import PromptRunItem, PromptRunResult
 from src.repositories.console_result_repository import (
@@ -5,6 +7,8 @@ from src.repositories.console_result_repository import (
 )
 from src.repositories.result_repository import ResultRepository
 from src.services.analysis.analyzer import analyze_visibility
+from src.services.analysis.sentiment import judge_sentiments
+from src.services.llm.base import LLMProvider
 from src.services.llm.factory import ProviderFactory
 from src.services.prompt_service import PromptService
 
@@ -39,6 +43,9 @@ class BatchPromptRunner:
                     else None
                 )
 
+                if analysis and settings.sentiment_enabled:
+                    self._enrich_sentiment(provider, llm_response.response, analysis)
+
                 results.append(
                     PromptRunItem(
                         prompt_id=prompt_id,
@@ -65,3 +72,20 @@ class BatchPromptRunner:
         self.result_repository.save(run_result)
 
         return run_result
+
+    @staticmethod
+    def _enrich_sentiment(
+        provider: LLMProvider,
+        response_text: str,
+        analysis: VisibilityAnalysis,
+    ) -> None:
+        mentioned = [m.brand for m in analysis.brands if m.mentioned]
+        if not mentioned:
+            return
+        try:
+            sentiments = judge_sentiments(provider, response_text, mentioned)
+        except Exception:
+            return
+        for mention in analysis.brands:
+            if mention.brand in sentiments:
+                mention.sentiment = sentiments[mention.brand]
