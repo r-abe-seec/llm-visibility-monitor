@@ -24,6 +24,7 @@ The project helps marketers, SEO professionals, and developers measure how brand
 - Brand visibility analysis (mention detection, ranking, visibility score, share of voice)
 - Sentiment analysis of brand mentions (judged by the executing LLM)
 - Result history API (past runs and brand visibility over time)
+- Scheduled daily runs (built-in cron scheduler, opt-in)
 - Competitive comparison report (target vs competitor visibility)
 - FastAPI REST API
 - Docker & Docker Compose support
@@ -270,6 +271,7 @@ This project uses:
 - ✅ Result history API
 - ✅ Competitive comparison report
 - ✅ Sentiment analysis
+- ✅ Scheduled runs
 
 ### Planned
 

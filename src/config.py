@@ -30,6 +30,13 @@ class Settings(BaseSettings):
     result_repository: str = "json"
     results_dir: str = "data/results"
 
+    # Scheduled runs (disabled by default to avoid unexpected API cost)
+    schedule_enabled: bool = False
+    schedule_cron: str = "0 6 * * *"
+    schedule_timezone: str = "Asia/Tokyo"
+    schedule_providers: str = "openai"
+    schedule_prompt_ids: str = ""
+
     # Visibility analysis
     analysis_enabled: bool = True
     sentiment_enabled: bool = True

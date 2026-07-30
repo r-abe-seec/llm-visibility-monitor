@@ -1,20 +1,41 @@
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, HTTPException
 
 from src.application.batch_prompt_runner import BatchPromptRunner
+from src.application.scheduled_runner import create_scheduler
 from src.config import settings
 from src.factories.repository_factory import RepositoryFactory
 from src.models.prompt_run import PromptRunRequest, PromptRunResult
-from src.routes import history
+from src.routes import history, schedule
 from src.services.brand_service import BrandService
 from src.services.llm.factory import ProviderFactory
 from src.services.prompt_service import PromptService
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncIterator[None]:
+    scheduler = None
+    if settings.schedule_enabled:
+        scheduler = create_scheduler()
+        scheduler.start()
+        app.state.scheduler = scheduler
+
+    yield
+
+    if scheduler is not None:
+        scheduler.shutdown(wait=False)
+
+
 app = FastAPI(
     title=settings.project_name,
     version=settings.version,
+    lifespan=lifespan,
 )
 
 app.include_router(history.router)
+app.include_router(schedule.router)
 
 prompt_service = PromptService()
 brand_service = BrandService(settings.brands_file)
