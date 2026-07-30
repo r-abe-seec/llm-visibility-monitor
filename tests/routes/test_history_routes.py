@@ -89,3 +89,20 @@ def test_visibility_timeseries_endpoint(tmp_path):
     assert [p["run_id"] for p in points] == ["old", "new"]
     assert [p["visibility_score"] for p in points] == [80.0, 100.0]
     app.dependency_overrides.clear()
+
+
+def test_comparison_endpoint(tmp_path):
+    client = _client(tmp_path)
+    resp = client.get("/history/comparison")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["runs_analyzed"] == 2
+    assert data["brands"][0]["brand"] == "電通"
+    assert data["brands"][0]["mention_rate"] == 1.0
+
+    filtered = client.get("/history/comparison", params={"provider": "openai"}).json()
+    assert filtered["runs_analyzed"] == 2
+
+    empty = client.get("/history/comparison", params={"provider": "nope"}).json()
+    assert empty["runs_analyzed"] == 0
+    app.dependency_overrides.clear()

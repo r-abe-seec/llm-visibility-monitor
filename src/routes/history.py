@@ -3,10 +3,11 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, Query
 
 from src.config import settings
-from src.models.history import RunSummary, VisibilityPoint
+from src.models.history import ComparisonReport, RunSummary, VisibilityPoint
 from src.models.prompt_run import PromptRunResult
 from src.repositories.json_result_reader import JsonResultReader
 from src.repositories.result_reader import ResultReader
+from src.services.analysis.comparison import build_comparison_report
 
 router = APIRouter(prefix="/history", tags=["history"])
 
@@ -90,3 +91,12 @@ def visibility(
 
     points.sort(key=lambda point: point.executed_at)
     return points
+
+
+@router.get("/comparison", response_model=ComparisonReport)
+def comparison(
+    reader: ReaderDep,
+    provider: Annotated[str | None, Query()] = None,
+) -> ComparisonReport:
+    """Compare target vs competitor visibility across stored runs."""
+    return build_comparison_report(reader.list_runs(), provider=provider)

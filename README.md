@@ -23,6 +23,7 @@ The project helps marketers, SEO professionals, and developers measure how brand
 - Store execution results in BigQuery
 - Brand visibility analysis (mention detection, ranking, visibility score, share of voice)
 - Result history API (past runs and brand visibility over time)
+- Competitive comparison report (target vs competitor visibility)
 - FastAPI REST API
 - Docker & Docker Compose support
 - Environment-based configuration
@@ -266,6 +267,7 @@ This project uses:
 - ✅ Gemini provider
 - ✅ Perplexity provider
 - ✅ Result history API
+- ✅ Competitive comparison report
 
 ### Planned
 

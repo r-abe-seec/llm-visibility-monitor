@@ -20,3 +20,19 @@ class VisibilityPoint(BaseModel):
     mentioned: bool
     rank: int | None = None
     visibility_score: float
+
+
+class BrandComparison(BaseModel):
+    brand: str
+    is_target: bool
+    runs_analyzed: int
+    mention_rate: float
+    average_score: float
+    best_rank: int | None = None
+    average_rank: float | None = None
+
+
+class ComparisonReport(BaseModel):
+    runs_analyzed: int
+    providers: list[str]
+    brands: list[BrandComparison]
