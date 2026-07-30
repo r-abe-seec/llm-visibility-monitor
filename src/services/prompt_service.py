@@ -12,9 +12,7 @@ class PromptService:
 
     def load_all(self) -> list[Prompt]:
         if not self.file_path.exists():
-            raise FileNotFoundError(
-                f"Prompt file not found: {self.file_path}"
-            )
+            raise FileNotFoundError(f"Prompt file not found: {self.file_path}")
 
         with self.file_path.open(
             "r",
@@ -25,10 +23,7 @@ class PromptService:
         if not data or "prompts" not in data:
             return []
 
-        return [
-            Prompt.model_validate(prompt_data)
-            for prompt_data in data["prompts"]
-        ]
+        return [Prompt.model_validate(prompt_data) for prompt_data in data["prompts"]]
 
     def get(self, prompt_id: str) -> Prompt:
         for prompt in self.load_all():

@@ -14,9 +14,7 @@ class BatchPromptRunner:
         result_repository: ResultRepository | None = None,
     ) -> None:
         self.prompt_service = prompt_service or PromptService()
-        self.result_repository = (
-            result_repository or ConsoleResultRepository()
-        )
+        self.result_repository = result_repository or ConsoleResultRepository()
 
     def run(
         self,

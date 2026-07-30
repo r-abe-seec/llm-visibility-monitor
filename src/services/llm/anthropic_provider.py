@@ -36,11 +36,7 @@ class AnthropicProvider(LLMProvider):
 
         latency_ms = int((perf_counter() - start_time) * 1000)
 
-        text_parts = [
-            block.text
-            for block in message.content
-            if block.type == "text"
-        ]
+        text_parts = [block.text for block in message.content if block.type == "text"]
 
         response_text = "\n".join(text_parts)
 

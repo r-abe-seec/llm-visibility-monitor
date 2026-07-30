@@ -31,6 +31,4 @@ class RepositoryFactory:
                 return BigQueryResultRepository(service)
 
             case _:
-                raise ValueError(
-                    f"Unsupported repository: {repository_type}"
-                )
+                raise ValueError(f"Unsupported repository: {repository_type}")

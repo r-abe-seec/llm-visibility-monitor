@@ -10,6 +10,4 @@ class ProviderFactory:
         if normalized_name in {"anthropic", "claude"}:
             return AnthropicProvider()
 
-        raise ValueError(
-            f"Unsupported provider: {provider_name}"
-        )
+        raise ValueError(f"Unsupported provider: {provider_name}")

@@ -72,7 +72,6 @@ def test_insert_rows_raises_error_when_bigquery_returns_errors() -> None:
 
     with pytest.raises(
         BigQueryInsertError,
-        match="Failed to insert rows into "
-        "test-project.test_dataset.test_table",
+        match="Failed to insert rows into test-project.test_dataset.test_table",
     ):
         service.insert_rows([{"run_id": "run-1"}])
