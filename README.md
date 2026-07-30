@@ -25,6 +25,7 @@ The project helps marketers, SEO professionals, and developers measure how brand
 - Sentiment analysis of brand mentions (judged by the executing LLM)
 - Result history API (past runs and brand visibility over time)
 - Scheduled daily runs (built-in cron scheduler, opt-in)
+- BigQuery analysis views & Looker Studio dashboard guide
 - Competitive comparison report (target vs competitor visibility)
 - FastAPI REST API
 - Docker & Docker Compose support
@@ -272,11 +273,11 @@ This project uses:
 - ✅ Competitive comparison report
 - ✅ Sentiment analysis
 - ✅ Scheduled runs
+- ✅ Looker Studio dashboard guide
 
 ### Planned
 
 - Azure OpenAI provider
-- Looker Studio dashboard
 - Cloud Run deployment guide
 
 ---
