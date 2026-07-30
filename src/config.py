@@ -11,6 +11,12 @@ class Settings(BaseSettings):
     anthropic_api_key: str | None = None
     anthropic_model: str | None = None
 
+    gcp_project_id: str | None = None
+    bigquery_dataset: str | None = None
+    bigquery_table: str = "prompt_run_results"
+
+    result_repository: str = "json"
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

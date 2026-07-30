@@ -14,7 +14,7 @@ app = FastAPI(
 )
 
 prompt_service = PromptService()
-result_repository = RepositoryFactory.create("json")
+result_repository = RepositoryFactory.create(settings.result_repository)
 
 @app.get("/")
 def root():
