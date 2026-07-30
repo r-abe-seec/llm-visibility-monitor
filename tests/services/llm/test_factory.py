@@ -1,6 +1,7 @@
 import pytest
 
 import src.services.llm.anthropic_provider as anthropic_module
+import src.services.llm.azure_openai_provider as azure_module
 import src.services.llm.gemini_provider as gemini_module
 import src.services.llm.openai_provider as openai_module
 import src.services.llm.perplexity_provider as perplexity_module
@@ -83,3 +84,29 @@ def test_perplexity_provider_requires_api_key(monkeypatch):
     monkeypatch.setattr(settings, "perplexity_api_key", None)
     with pytest.raises(ValueError, match="PERPLEXITY_API_KEY"):
         ProviderFactory.create("perplexity")
+
+
+@pytest.mark.parametrize("name", ["azure", "azure-openai", "Azure_OpenAI"])
+def test_azure_aliases_select_azure_provider(name, monkeypatch):
+    from src.config import settings
+
+    monkeypatch.setattr(settings, "azure_openai_api_key", "test-key")
+    monkeypatch.setattr(settings, "azure_openai_endpoint", "https://x.openai.azure.com")
+    monkeypatch.setattr(settings, "azure_openai_deployment", "gpt-4o")
+    monkeypatch.setattr(azure_module, "AzureOpenAI", _DummyClient)
+
+    provider = ProviderFactory.create(name)
+    assert provider.provider_name == "azure_openai"
+
+
+def test_azure_provider_requires_configuration(monkeypatch):
+    from src.config import settings
+
+    monkeypatch.setattr(settings, "azure_openai_api_key", None)
+    with pytest.raises(ValueError, match="AZURE_OPENAI_API_KEY"):
+        ProviderFactory.create("azure")
+
+    monkeypatch.setattr(settings, "azure_openai_api_key", "k")
+    monkeypatch.setattr(settings, "azure_openai_endpoint", None)
+    with pytest.raises(ValueError, match="AZURE_OPENAI_ENDPOINT"):
+        ProviderFactory.create("azure")

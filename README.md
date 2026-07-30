@@ -15,7 +15,7 @@ The project helps marketers, SEO professionals, and developers measure how brand
 
 - Execute prompts against multiple LLM providers
 - Execute multiple prompts in a single request
-- Support OpenAI, Anthropic, Gemini, and Perplexity providers
+- Support OpenAI, Anthropic, Gemini, Perplexity, and Azure OpenAI providers
 - Configurable result repositories
   - Console
   - JSON
@@ -55,6 +55,7 @@ The project helps marketers, SEO professionals, and developers measure how brand
 | Anthropic     |          | JSON                 |
 | Gemini        |          | BigQuery             |
 | Perplexity    |          |                      |
+| Azure OpenAI  |          |                      |
 +---------------+          +----------------------+
        |
        v
@@ -274,10 +275,10 @@ This project uses:
 - ✅ Sentiment analysis
 - ✅ Scheduled runs
 - ✅ Looker Studio dashboard guide
+- ✅ Azure OpenAI provider
 
 ### Planned
 
-- Azure OpenAI provider
 - Cloud Run deployment guide
 
 ---

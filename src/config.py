@@ -17,6 +17,12 @@ class Settings(BaseSettings):
     gemini_api_key: str | None = None
     gemini_model: str = "gemini-2.5-flash"
 
+    # Azure OpenAI
+    azure_openai_api_key: str | None = None
+    azure_openai_endpoint: str | None = None
+    azure_openai_api_version: str = "2024-10-21"
+    azure_openai_deployment: str | None = None
+
     # Perplexity (OpenAI-compatible API)
     perplexity_api_key: str | None = None
     perplexity_model: str = "sonar"

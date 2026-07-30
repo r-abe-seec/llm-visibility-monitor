@@ -1,4 +1,5 @@
 from src.services.llm.anthropic_provider import AnthropicProvider
+from src.services.llm.azure_openai_provider import AzureOpenAIProvider
 from src.services.llm.base import LLMProvider
 from src.services.llm.gemini_provider import GeminiProvider
 from src.services.llm.openai_provider import OpenAIProvider
@@ -21,5 +22,8 @@ class ProviderFactory:
 
         if normalized_name in {"perplexity", "pplx", "sonar"}:
             return PerplexityProvider()
+
+        if normalized_name in {"azure", "azure-openai", "azure_openai"}:
+            return AzureOpenAIProvider()
 
         raise ValueError(f"Unsupported provider: {provider_name}")
