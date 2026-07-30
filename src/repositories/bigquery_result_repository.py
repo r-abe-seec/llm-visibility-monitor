@@ -3,10 +3,11 @@ from datetime import UTC, datetime
 from uuid import uuid4
 
 from src.models.prompt_run import PromptRunResult
+from src.repositories.result_repository import ResultRepository
 from src.services.bigquery_service import BigQueryService
 
 
-class BigQueryResultRepository:
+class BigQueryResultRepository(ResultRepository):
     def __init__(self, bigquery_service: BigQueryService) -> None:
         self.bigquery_service = bigquery_service
 

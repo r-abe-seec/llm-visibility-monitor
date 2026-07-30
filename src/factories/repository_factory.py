@@ -23,6 +23,17 @@ class RepositoryFactory:
                 return JsonResultRepository()
 
             case "bigquery":
+                if settings.gcp_project_id is None:
+                    raise ValueError(
+                        "GCP_PROJECT_ID is required when using the BigQuery repository"
+                    )
+
+                if settings.bigquery_dataset is None:
+                    raise ValueError(
+                        "BIGQUERY_DATASET is required when using "
+                        "the BigQuery repository"
+                    )
+
                 service = BigQueryService(
                     project_id=settings.gcp_project_id,
                     dataset=settings.bigquery_dataset,

@@ -11,3 +11,15 @@
 
       - name: Run tests
         run: python -m pytest
+
+      - name: Run Ruff lint
+        run: ruff check --output-format=github .
+
+      - name: Check Ruff formatting
+        run: ruff format --check .
+
+      - name: Run mypy
+        run: python -m mypy
+
+      - name: Run tests
+        run: python -m pytest

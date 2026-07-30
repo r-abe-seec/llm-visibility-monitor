@@ -5,12 +5,15 @@ class Settings(BaseSettings):
     project_name: str = "LLM Visibility Monitor"
     version: str = "0.1.0"
 
+    # OpenAI
     openai_api_key: str | None = None
-    openai_model: str | None = None
+    openai_model: str = "gpt-5-mini"
 
+    # Anthropic
     anthropic_api_key: str | None = None
-    anthropic_model: str | None = None
+    anthropic_model: str = "claude-sonnet-4-20250514"
 
+    # BigQuery
     gcp_project_id: str | None = None
     bigquery_dataset: str | None = None
     bigquery_table: str = "prompt_run_results"
