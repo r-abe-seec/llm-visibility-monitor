@@ -13,6 +13,10 @@ class Settings(BaseSettings):
     anthropic_api_key: str | None = None
     anthropic_model: str = "claude-sonnet-4-20250514"
 
+    # Gemini
+    gemini_api_key: str | None = None
+    gemini_model: str = "gemini-2.5-flash"
+
     # BigQuery
     gcp_project_id: str | None = None
     bigquery_dataset: str | None = None

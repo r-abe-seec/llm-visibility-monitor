@@ -1,6 +1,7 @@
 import pytest
 
 import src.services.llm.anthropic_provider as anthropic_module
+import src.services.llm.gemini_provider as gemini_module
 import src.services.llm.openai_provider as openai_module
 from src.services.llm.factory import ProviderFactory
 
@@ -43,3 +44,22 @@ def test_openai_provider_requires_api_key(monkeypatch):
     monkeypatch.setattr(settings, "openai_api_key", None)
     with pytest.raises(ValueError, match="OPENAI_API_KEY"):
         ProviderFactory.create("openai")
+
+
+@pytest.mark.parametrize("name", ["gemini", "google", "Gemini"])
+def test_gemini_aliases_select_gemini_provider(name, monkeypatch):
+    from src.config import settings
+
+    monkeypatch.setattr(settings, "gemini_api_key", "test-key")
+    monkeypatch.setattr(gemini_module.genai, "Client", _DummyClient)
+
+    provider = ProviderFactory.create(name)
+    assert provider.provider_name == "gemini"
+
+
+def test_gemini_provider_requires_api_key(monkeypatch):
+    from src.config import settings
+
+    monkeypatch.setattr(settings, "gemini_api_key", None)
+    with pytest.raises(ValueError, match="GEMINI_API_KEY"):
+        ProviderFactory.create("gemini")

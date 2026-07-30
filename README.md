@@ -15,7 +15,7 @@ The project helps marketers, SEO professionals, and developers measure how brand
 
 - Execute prompts against multiple LLM providers
 - Execute multiple prompts in a single request
-- Support OpenAI and Anthropic providers
+- Support OpenAI, Anthropic, and Gemini providers
 - Configurable result repositories
   - Console
   - JSON
@@ -48,8 +48,9 @@ The project helps marketers, SEO professionals, and developers measure how brand
 +---------------+          +----------------------+
 | OpenAI        |          | Console              |
 | Anthropic     |          | JSON                 |
-+---------------+          | BigQuery             |
-       |                   +----------------------+
+| Gemini        |          | BigQuery             |
++---------------+          +----------------------+
+       |
        v
 +----------------------+
 | Visibility Analysis  |
@@ -260,10 +261,10 @@ This project uses:
 - ✅ mypy
 - ✅ Docker
 - ✅ Docker Compose
+- ✅ Gemini provider
 
 ### Planned
 
-- Gemini provider
 - Perplexity provider
 - Azure OpenAI provider
 - Result history API
