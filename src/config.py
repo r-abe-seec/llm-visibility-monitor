@@ -3,7 +3,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     project_name: str = "LLM Visibility Monitor"
-    version: str = "0.1.0"
+    version: str = "0.2.0"
 
     # OpenAI
     openai_api_key: str | None = None
@@ -19,6 +19,10 @@ class Settings(BaseSettings):
     bigquery_table: str = "prompt_run_results"
 
     result_repository: str = "json"
+
+    # Visibility analysis
+    analysis_enabled: bool = True
+    brands_file: str = "prompts/brands.yaml"
 
     model_config = SettingsConfigDict(
         env_file=".env",

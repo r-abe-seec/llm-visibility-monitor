@@ -1,8 +1,10 @@
+from src.models.brand import Brand
 from src.models.prompt_run import PromptRunItem, PromptRunResult
 from src.repositories.console_result_repository import (
     ConsoleResultRepository,
 )
 from src.repositories.result_repository import ResultRepository
+from src.services.analysis.analyzer import analyze_visibility
 from src.services.llm.factory import ProviderFactory
 from src.services.prompt_service import PromptService
 
@@ -12,9 +14,11 @@ class BatchPromptRunner:
         self,
         prompt_service: PromptService | None = None,
         result_repository: ResultRepository | None = None,
+        brands: list[Brand] | None = None,
     ) -> None:
         self.prompt_service = prompt_service or PromptService()
         self.result_repository = result_repository or ConsoleResultRepository()
+        self.brands = brands or []
 
     def run(
         self,
@@ -29,11 +33,18 @@ class BatchPromptRunner:
                 prompt = self.prompt_service.get(prompt_id)
                 llm_response = provider.generate(prompt.text)
 
+                analysis = (
+                    analyze_visibility(llm_response.response, self.brands)
+                    if self.brands
+                    else None
+                )
+
                 results.append(
                     PromptRunItem(
                         prompt_id=prompt_id,
                         success=True,
                         result=llm_response,
+                        analysis=analysis,
                     )
                 )
 

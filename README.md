@@ -1,5 +1,5 @@
 # LLM Visibility Monitor
-![CI](https://github.com/r-abe-seec/llm-visibility-monitor/actions/workflows/python.yml/badge.svg)
+![CI](https://github.com/r-abe-seec/llm-visibility-monitor/actions/workflows/test.yml/badge.svg)
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -21,6 +21,7 @@ The project helps marketers, SEO professionals, and developers measure how brand
   - JSON
   - BigQuery
 - Store execution results in BigQuery
+- Brand visibility analysis (mention detection, ranking, visibility score, share of voice)
 - FastAPI REST API
 - Docker & Docker Compose support
 - Environment-based configuration
@@ -48,7 +49,15 @@ The project helps marketers, SEO professionals, and developers measure how brand
 | OpenAI        |          | Console              |
 | Anthropic     |          | JSON                 |
 +---------------+          | BigQuery             |
-                           +----------------------+
+       |                   +----------------------+
+       v
++----------------------+
+| Visibility Analysis  |
++----------------------+
+| Mention detection    |
+| Ranking              |
+| Visibility scoring   |
++----------------------+
 ```
 
 ---

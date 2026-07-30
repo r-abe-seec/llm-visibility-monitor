@@ -4,6 +4,7 @@ from src.application.batch_prompt_runner import BatchPromptRunner
 from src.config import settings
 from src.factories.repository_factory import RepositoryFactory
 from src.models.prompt_run import PromptRunRequest, PromptRunResult
+from src.services.brand_service import BrandService
 from src.services.llm.factory import ProviderFactory
 from src.services.prompt_service import PromptService
 
@@ -13,6 +14,7 @@ app = FastAPI(
 )
 
 prompt_service = PromptService()
+brand_service = BrandService(settings.brands_file)
 result_repository = RepositoryFactory.create(settings.result_repository)
 
 
@@ -47,6 +49,11 @@ def get_prompt(prompt_id: str):
         ) from error
 
 
+@app.get("/brands")
+def list_brands():
+    return brand_service.load_all()
+
+
 @app.get("/run/{provider_name}/{prompt_id}")
 def run_prompt(provider_name: str, prompt_id: str):
     try:
@@ -71,9 +78,12 @@ def run_prompt(provider_name: str, prompt_id: str):
 @app.post("/runs", response_model=PromptRunResult)
 def run_prompts(request: PromptRunRequest) -> PromptRunResult:
     try:
+        brands = brand_service.load_all() if settings.analysis_enabled else []
+
         runner = BatchPromptRunner(
             prompt_service=prompt_service,
             result_repository=result_repository,
+            brands=brands,
         )
 
         return runner.run(

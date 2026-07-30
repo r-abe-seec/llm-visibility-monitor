@@ -3,6 +3,7 @@ from uuid import uuid4
 
 from pydantic import BaseModel, Field
 
+from src.models.analysis import VisibilityAnalysis
 from src.models.llm_response import LLMResponse
 
 
@@ -15,6 +16,7 @@ class PromptRunItem(BaseModel):
     prompt_id: str
     success: bool
     result: LLMResponse | None = None
+    analysis: VisibilityAnalysis | None = None
     error: str | None = None
 
 

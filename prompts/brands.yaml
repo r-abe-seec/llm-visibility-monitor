@@ -1,0 +1,12 @@
+# Brands to track in LLM responses.
+# Set is_target: true for the brand(s) you own; the rest are treated as competitors.
+brands:
+  - name: 電通
+    aliases: [Dentsu]
+    is_target: true
+  - name: 博報堂
+    aliases: [Hakuhodo]
+  - name: サイバーエージェント
+    aliases: [CyberAgent]
+  - name: ADKマーケティング・ソリューションズ
+    aliases: [ADK]

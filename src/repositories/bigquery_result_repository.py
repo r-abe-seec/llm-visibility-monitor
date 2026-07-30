@@ -18,6 +18,7 @@ class BigQueryResultRepository(ResultRepository):
 
         for item in run_result.results:
             result = item.result
+            analysis = item.analysis
 
             rows.append(
                 {
@@ -35,6 +36,9 @@ class BigQueryResultRepository(ResultRepository):
                     "input_tokens": result.input_tokens if result else None,
                     "output_tokens": result.output_tokens if result else None,
                     "latency_ms": result.latency_ms if result else None,
+                    "target_score": (analysis.target_score if analysis else None),
+                    "share_of_voice": (analysis.share_of_voice if analysis else None),
+                    "analysis": (analysis.model_dump_json() if analysis else None),
                     "metadata": json.dumps({}, ensure_ascii=False),
                 }
             )
