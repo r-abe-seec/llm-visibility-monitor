@@ -26,6 +26,7 @@ The project helps marketers, SEO professionals, and developers measure how brand
 - Result history API (past runs and brand visibility over time)
 - Scheduled daily runs (built-in cron scheduler, opt-in)
 - Google Chat / Slack alerts on visibility loss or score drops (opt-in)
+- Prompt generation from category templates (`POST /prompts/generate`)
 - BigQuery analysis views & Looker Studio dashboard guide
 - Competitive comparison report (target vs competitor visibility)
 - FastAPI REST API
@@ -279,10 +280,10 @@ This project uses:
 - ✅ Azure OpenAI provider
 - ✅ Cloud Run deployment guide
 - ✅ Visibility change alerts (Google Chat / Slack)
+- ✅ Prompt template generation
 
 ### Planned
 
-- Prompt template generation per category
 - Materialized dashboard tables for large datasets
 
 ---

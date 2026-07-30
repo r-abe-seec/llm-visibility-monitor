@@ -1,0 +1,25 @@
+# Prompt templates for brand visibility measurement.
+# Placeholders:
+#   {industry} - the industry / service category (required)
+#   {target}   - your brand name (templates using it are skipped
+#                when no target is given)
+templates:
+  - category: recommendation
+    title: おすすめ企業
+    text: "{industry}でおすすめの会社を5社挙げ、それぞれの特徴を簡潔に説明してください。"
+
+  - category: ranking
+    title: 主要企業ランキング
+    text: "{industry}の主要な会社を、評価が高い順にランキング形式で5社紹介してください。"
+
+  - category: selection
+    title: 選び方とおすすめ
+    text: "{industry}を選ぶ際のポイントを説明したうえで、具体的におすすめの会社を挙げてください。"
+
+  - category: comparison
+    title: 競合比較
+    text: "{target}と競合する{industry}を3社挙げ、それぞれの強み・弱みを{target}と比較してください。"
+
+  - category: reputation
+    title: 評判
+    text: "{target}の評判や強み・弱みについて、客観的に説明してください。"

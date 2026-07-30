@@ -8,7 +8,7 @@ from src.application.scheduled_runner import create_scheduler
 from src.config import settings
 from src.factories.repository_factory import RepositoryFactory
 from src.models.prompt_run import PromptRunRequest, PromptRunResult
-from src.routes import history, schedule
+from src.routes import history, prompt_generation, schedule
 from src.services.brand_service import BrandService
 from src.services.llm.factory import ProviderFactory
 from src.services.prompt_service import PromptService
@@ -36,6 +36,7 @@ app = FastAPI(
 
 app.include_router(history.router)
 app.include_router(schedule.router)
+app.include_router(prompt_generation.router)
 
 prompt_service = PromptService()
 brand_service = BrandService(settings.brands_file)

@@ -31,3 +31,22 @@ class PromptService:
                 return prompt
 
         raise KeyError(f"Prompt not found: {prompt_id}")
+
+    def append(self, prompts: list[Prompt]) -> None:
+        """Append prompts to the YAML file, keeping existing entries."""
+        existing: list[dict[str, str]] = []
+        if self.file_path.exists():
+            with self.file_path.open("r", encoding="utf-8") as file:
+                data = yaml.safe_load(file) or {}
+            existing = list(data.get("prompts") or [])
+
+        existing.extend(prompt.model_dump() for prompt in prompts)
+
+        self.file_path.parent.mkdir(parents=True, exist_ok=True)
+        with self.file_path.open("w", encoding="utf-8") as file:
+            yaml.safe_dump(
+                {"prompts": existing},
+                file,
+                allow_unicode=True,
+                sort_keys=False,
+            )
