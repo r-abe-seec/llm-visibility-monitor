@@ -17,6 +17,11 @@ class Settings(BaseSettings):
     gemini_api_key: str | None = None
     gemini_model: str = "gemini-2.5-flash"
 
+    # Perplexity (OpenAI-compatible API)
+    perplexity_api_key: str | None = None
+    perplexity_model: str = "sonar"
+    perplexity_base_url: str = "https://api.perplexity.ai"
+
     # BigQuery
     gcp_project_id: str | None = None
     bigquery_dataset: str | None = None

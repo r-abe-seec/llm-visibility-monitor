@@ -15,7 +15,7 @@ The project helps marketers, SEO professionals, and developers measure how brand
 
 - Execute prompts against multiple LLM providers
 - Execute multiple prompts in a single request
-- Support OpenAI, Anthropic, and Gemini providers
+- Support OpenAI, Anthropic, Gemini, and Perplexity providers
 - Configurable result repositories
   - Console
   - JSON
@@ -49,6 +49,7 @@ The project helps marketers, SEO professionals, and developers measure how brand
 | OpenAI        |          | Console              |
 | Anthropic     |          | JSON                 |
 | Gemini        |          | BigQuery             |
+| Perplexity    |          |                      |
 +---------------+          +----------------------+
        |
        v
@@ -262,10 +263,10 @@ This project uses:
 - ✅ Docker
 - ✅ Docker Compose
 - ✅ Gemini provider
+- ✅ Perplexity provider
 
 ### Planned
 
-- Perplexity provider
 - Azure OpenAI provider
 - Result history API
 - Looker Studio dashboard

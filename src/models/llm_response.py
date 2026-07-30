@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class LLMResponse(BaseModel):
@@ -9,3 +9,4 @@ class LLMResponse(BaseModel):
     input_tokens: int
     output_tokens: int
     latency_ms: int
+    citations: list[str] = Field(default_factory=list)

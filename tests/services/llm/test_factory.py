@@ -3,6 +3,7 @@ import pytest
 import src.services.llm.anthropic_provider as anthropic_module
 import src.services.llm.gemini_provider as gemini_module
 import src.services.llm.openai_provider as openai_module
+import src.services.llm.perplexity_provider as perplexity_module
 from src.services.llm.factory import ProviderFactory
 
 
@@ -63,3 +64,22 @@ def test_gemini_provider_requires_api_key(monkeypatch):
     monkeypatch.setattr(settings, "gemini_api_key", None)
     with pytest.raises(ValueError, match="GEMINI_API_KEY"):
         ProviderFactory.create("gemini")
+
+
+@pytest.mark.parametrize("name", ["perplexity", "pplx", "sonar", "Perplexity"])
+def test_perplexity_aliases_select_perplexity_provider(name, monkeypatch):
+    from src.config import settings
+
+    monkeypatch.setattr(settings, "perplexity_api_key", "test-key")
+    monkeypatch.setattr(perplexity_module, "OpenAI", _DummyClient)
+
+    provider = ProviderFactory.create(name)
+    assert provider.provider_name == "perplexity"
+
+
+def test_perplexity_provider_requires_api_key(monkeypatch):
+    from src.config import settings
+
+    monkeypatch.setattr(settings, "perplexity_api_key", None)
+    with pytest.raises(ValueError, match="PERPLEXITY_API_KEY"):
+        ProviderFactory.create("perplexity")
