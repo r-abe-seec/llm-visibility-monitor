@@ -63,5 +63,6 @@ The views used by the dashboard:
 - Data freshness defaults to 12 hours for BigQuery sources. Adjust in the
   data source settings if you run scheduled prompts more often.
 - Costs: Looker Studio issues BigQuery queries on view refresh. The
-  `prompt_run_results` table is small in most deployments, but you can
-  materialize views into tables later if needed.
+  `prompt_run_results` table is small in most deployments. When it grows,
+  switch the data sources to the materialized `t_*` tables — see
+  [docs/materialized-tables.md](materialized-tables.md).

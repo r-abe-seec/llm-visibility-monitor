@@ -281,10 +281,12 @@ This project uses:
 - ✅ Cloud Run deployment guide
 - ✅ Visibility change alerts (Google Chat / Slack)
 - ✅ Prompt template generation
+- ✅ Materialized dashboard tables
 
 ### Planned
 
-- Materialized dashboard tables for large datasets
+- BigQuery-backed history reader (history API & score-drop alerts on BigQuery)
+- Web UI for run management
 
 ---
 
