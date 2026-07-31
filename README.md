@@ -16,6 +16,7 @@ The project helps marketers, SEO professionals, and developers measure how brand
 - Execute prompts against multiple LLM providers
 - Execute multiple prompts in a single request
 - Support OpenAI, Anthropic, Gemini, Perplexity, and Azure OpenAI providers
+- Search-grounded providers (`openai-search`, `gemini-search`) with source citations — measure real AI search answers, not just model knowledge
 - Configurable result repositories
   - Console
   - JSON
@@ -283,6 +284,7 @@ This project uses:
 - ✅ Prompt template generation
 - ✅ Materialized dashboard tables
 - ✅ BigQuery-backed history reader
+- ✅ Search-grounded providers (OpenAI web search / Gemini grounding)
 
 ### Planned
 

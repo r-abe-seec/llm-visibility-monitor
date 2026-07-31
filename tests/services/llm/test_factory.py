@@ -3,7 +3,9 @@ import pytest
 import src.services.llm.anthropic_provider as anthropic_module
 import src.services.llm.azure_openai_provider as azure_module
 import src.services.llm.gemini_provider as gemini_module
+import src.services.llm.gemini_search_provider as gemini_search_module
 import src.services.llm.openai_provider as openai_module
+import src.services.llm.openai_search_provider as openai_search_module
 import src.services.llm.perplexity_provider as perplexity_module
 from src.services.llm.factory import ProviderFactory
 
@@ -110,3 +112,23 @@ def test_azure_provider_requires_configuration(monkeypatch):
     monkeypatch.setattr(settings, "azure_openai_endpoint", None)
     with pytest.raises(ValueError, match="AZURE_OPENAI_ENDPOINT"):
         ProviderFactory.create("azure")
+
+
+@pytest.mark.parametrize("name", ["openai-search", "openai_search", "chatgpt-search"])
+def test_openai_search_aliases(name, monkeypatch):
+    from src.config import settings
+
+    monkeypatch.setattr(settings, "openai_api_key", "test-key")
+    monkeypatch.setattr(openai_search_module, "OpenAI", _DummyClient)
+
+    assert ProviderFactory.create(name).provider_name == "openai_search"
+
+
+@pytest.mark.parametrize("name", ["gemini-search", "gemini_search"])
+def test_gemini_search_aliases(name, monkeypatch):
+    from src.config import settings
+
+    monkeypatch.setattr(settings, "gemini_api_key", "test-key")
+    monkeypatch.setattr(gemini_search_module.genai, "Client", _DummyClient)
+
+    assert ProviderFactory.create(name).provider_name == "gemini_search"
