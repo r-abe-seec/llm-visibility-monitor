@@ -2,10 +2,9 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
-from src.config import settings
+from src.factories.reader_factory import build_result_reader
 from src.models.history import ComparisonReport, RunSummary, VisibilityPoint
 from src.models.prompt_run import PromptRunResult
-from src.repositories.json_result_reader import JsonResultReader
 from src.repositories.result_reader import ResultReader
 from src.services.analysis.comparison import build_comparison_report
 
@@ -13,7 +12,7 @@ router = APIRouter(prefix="/history", tags=["history"])
 
 
 def get_reader() -> ResultReader:
-    return JsonResultReader(settings.results_dir)
+    return build_result_reader()
 
 
 ReaderDep = Annotated[ResultReader, Depends(get_reader)]

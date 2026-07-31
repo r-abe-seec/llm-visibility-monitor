@@ -1,8 +1,8 @@
 import logging
 
 from src.config import settings
+from src.factories.reader_factory import build_result_reader
 from src.models.prompt_run import PromptRunResult
-from src.repositories.json_result_reader import JsonResultReader
 from src.services.notification.notifier import (
     ConsoleNotifier,
     GoogleChatWebhookNotifier,
@@ -75,7 +75,7 @@ class AlertService:
 
     def find_previous_run(self, run: PromptRunResult) -> PromptRunResult | None:
         """Most recent stored run for the same provider before this one."""
-        reader = JsonResultReader(settings.results_dir)
+        reader = build_result_reader()
         for candidate in reader.list_runs():
             if candidate.run_id == run.run_id:
                 continue

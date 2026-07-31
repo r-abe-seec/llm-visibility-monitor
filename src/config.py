@@ -35,6 +35,7 @@ class Settings(BaseSettings):
 
     result_repository: str = "json"
     results_dir: str = "data/results"
+    history_max_runs: int = 100
 
     # Scheduled runs (disabled by default to avoid unexpected API cost)
     schedule_enabled: bool = False

@@ -42,3 +42,34 @@ class BigQueryService:
             raise BigQueryInsertError(
                 f"Failed to insert rows into {self.table_id}: {errors}"
             )
+
+    def query_rows(
+        self,
+        sql: str,
+        parameters: dict[str, Any] | None = None,
+    ) -> list[dict[str, Any]]:
+        """Run a parameterized query and return rows as dictionaries.
+
+        ``sql`` may reference the configured table as ``{table}``.
+        """
+        query_parameters = [
+            bigquery.ScalarQueryParameter(name, _bq_type(value), value)
+            for name, value in (parameters or {}).items()
+        ]
+        job_config = bigquery.QueryJobConfig(query_parameters=query_parameters)
+
+        job = self.client.query(
+            sql.format(table=self.table_id),
+            job_config=job_config,
+        )
+        return [dict(row) for row in job.result()]
+
+
+def _bq_type(value: Any) -> str:
+    if isinstance(value, bool):
+        return "BOOL"
+    if isinstance(value, int):
+        return "INT64"
+    if isinstance(value, float):
+        return "FLOAT64"
+    return "STRING"

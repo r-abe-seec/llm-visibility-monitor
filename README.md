@@ -23,7 +23,7 @@ The project helps marketers, SEO professionals, and developers measure how brand
 - Store execution results in BigQuery
 - Brand visibility analysis (mention detection, ranking, visibility score, share of voice)
 - Sentiment analysis of brand mentions (judged by the executing LLM)
-- Result history API (past runs and brand visibility over time)
+- Result history API (past runs and brand visibility over time, JSON or BigQuery backed)
 - Scheduled daily runs (built-in cron scheduler, opt-in)
 - Google Chat / Slack alerts on visibility loss or score drops (opt-in)
 - Prompt generation from category templates (`POST /prompts/generate`)
@@ -282,10 +282,10 @@ This project uses:
 - ✅ Visibility change alerts (Google Chat / Slack)
 - ✅ Prompt template generation
 - ✅ Materialized dashboard tables
+- ✅ BigQuery-backed history reader
 
 ### Planned
 
-- BigQuery-backed history reader (history API & score-drop alerts on BigQuery)
 - Web UI for run management
 
 ---
