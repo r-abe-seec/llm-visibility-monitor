@@ -79,3 +79,39 @@ prompts:
   category: journey_trust
   title: 失敗回避
   text: 葬儀社選びで後悔・失敗しないための注意点を教えてください。そのうえで評判の良い会社を挙げてください。
+- id: gen_recommendation_2
+  category: recommendation
+  title: おすすめ企業
+  text: 横浜の家族葬でおすすめの会社を5社挙げ、それぞれの特徴を簡潔に説明してください。
+- id: gen_ranking_2
+  category: ranking
+  title: 主要企業ランキング
+  text: 横浜の家族葬の主要な会社を、評価が高い順にランキング形式で5社紹介してください。
+- id: gen_selection_2
+  category: selection
+  title: 選び方とおすすめ
+  text: 横浜の家族葬を選ぶ際のポイントを説明したうえで、具体的におすすめの会社を挙げてください。
+- id: gen_comparison_2
+  category: comparison
+  title: 競合比較
+  text: 花葬儀と競合する横浜の家族葬を3社挙げ、それぞれの強み・弱みを花葬儀と比較してください。
+- id: gen_reputation_2
+  category: reputation
+  title: 評判
+  text: 花葬儀の評判や強み・弱みについて、客観的に説明してください。
+- id: gen_journey_urgent_4
+  category: journey_urgent
+  title: 緊急時の行動
+  text: 身内が亡くなりました。まず何をすべきか順を追って教えてください。横浜の家族葬はどう選べばよいか、信頼できる会社があればあわせて教えてください。
+- id: gen_journey_cost_4
+  category: journey_cost
+  title: 費用相場
+  text: 横浜の家族葬の費用相場を教えてください。費用を抑えるコツと、料金が明確で信頼できる会社があれば教えてください。
+- id: gen_journey_flow_4
+  category: journey_flow
+  title: 利用の流れ
+  text: 横浜の家族葬に依頼してから当日までの流れを教えてください。初めてでも安心して任せられる会社があれば教えてください。
+- id: gen_journey_trust_4
+  category: journey_trust
+  title: 失敗回避
+  text: 横浜の家族葬選びで後悔・失敗しないための注意点を教えてください。そのうえで評判の良い会社を挙げてください。

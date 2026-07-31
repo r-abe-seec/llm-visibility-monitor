@@ -33,7 +33,8 @@ def _ranked_lines(text: str) -> list[tuple[int, str]]:
     Three formats are recognized:
     - numbered items ("1.", "1)", "1位", optionally bold/heading-decorated)
       use their explicit number
-    - bullet items ("-", "*", "・") use a running counter
+    - bullet items ("-", "*", "・") use a running counter that resets
+      whenever a non-list line interrupts the list
     - markdown table rows use their data-row position; the first row of a
       table is treated as the header and skipped, separator rows ("|---|")
       are ignored
@@ -65,6 +66,11 @@ def _ranked_lines(text: str) -> list[tuple[int, str]]:
         if _BULLET_RE.match(line):
             bullet_counter += 1
             ranked.append((bullet_counter, line))
+            continue
+        # A non-list, non-empty line ends the current bullet list, so the
+        # next list starts counting from 1 again.
+        if line.strip():
+            bullet_counter = 0
     return ranked
 
 

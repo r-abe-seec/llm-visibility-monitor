@@ -74,3 +74,22 @@ def test_find_rank_two_separate_tables_reset_counter():
 def test_plain_bullets_still_work_after_table():
     text = "| H | x |\n|---|---|\n| 電通 | y |\n\n- 博報堂\n- ADK"
     assert md.find_rank(text, ["ADK"]) == 2
+
+
+def test_bullet_counter_resets_between_lists():
+    text = (
+        "費用を抑えるコツ:\n"
+        "- 相見積もりを取る\n"
+        "- 公営斎場を使う\n"
+        "\n"
+        "おすすめの会社:\n"
+        "- 小さなお葬式\n"
+        "- よりそうお葬式\n"
+    )
+    assert md.find_rank(text, ["小さなお葬式"]) == 1
+    assert md.find_rank(text, ["よりそうお葬式"]) == 2
+
+
+def test_blank_lines_do_not_reset_bullet_counter():
+    text = "- 電通\n\n- 博報堂"
+    assert md.find_rank(text, ["博報堂"]) == 2
