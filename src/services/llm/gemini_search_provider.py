@@ -31,6 +31,13 @@ class GeminiSearchProvider(LLMProvider):
 
     @staticmethod
     def _extract_citations(response: Any) -> list[str]:
+        """Collect source references from grounding metadata.
+
+        Gemini returns opaque redirect links in ``web.uri``; the actual
+        source domain is exposed in ``web.title``. Prefer the domain (as a
+        https URL, so downstream domain analysis works) and fall back to
+        the redirect URI.
+        """
         urls: list[str] = []
         for candidate in getattr(response, "candidates", None) or []:
             metadata = getattr(candidate, "grounding_metadata", None)
@@ -38,9 +45,18 @@ class GeminiSearchProvider(LLMProvider):
                 continue
             for chunk in getattr(metadata, "grounding_chunks", None) or []:
                 web = getattr(chunk, "web", None)
-                uri = getattr(web, "uri", None) if web else None
-                if uri and uri not in urls:
-                    urls.append(uri)
+                if web is None:
+                    continue
+                title = getattr(web, "title", None)
+                uri = getattr(web, "uri", None)
+                if title and "." in title and " " not in title:
+                    reference = f"https://{title}"
+                elif uri:
+                    reference = uri
+                else:
+                    continue
+                if reference not in urls:
+                    urls.append(reference)
         return urls
 
     def generate(self, prompt: str) -> LLMResponse:

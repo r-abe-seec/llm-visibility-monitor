@@ -63,10 +63,18 @@ class _FakeModels:
     def generate_content(self, **kwargs):
         self.calls.append(kwargs)
         chunk = SimpleNamespace(
-            web=SimpleNamespace(uri="https://vertexaisearch.example/redirect")
+            web=SimpleNamespace(
+                uri="https://vertexaisearch.example/redirect",
+                title="osohshiki.jp",
+            )
+        )
+        chunk_no_title = SimpleNamespace(
+            web=SimpleNamespace(
+                uri="https://vertexaisearch.example/redirect2", title=None
+            )
         )
         candidate = SimpleNamespace(
-            grounding_metadata=SimpleNamespace(grounding_chunks=[chunk])
+            grounding_metadata=SimpleNamespace(grounding_chunks=[chunk, chunk_no_title])
         )
         return SimpleNamespace(
             candidates=[candidate],
@@ -97,7 +105,10 @@ def test_gemini_search_enables_grounding_tool(monkeypatch):
     assert config.tools[0].google_search is not None
 
 
-def test_gemini_search_extracts_citations(monkeypatch):
+def test_gemini_search_prefers_source_domain_over_redirect(monkeypatch):
     result = _gemini_provider(monkeypatch).generate("q")
     assert result.provider == "gemini_search"
-    assert result.citations == ["https://vertexaisearch.example/redirect"]
+    assert result.citations == [
+        "https://osohshiki.jp",
+        "https://vertexaisearch.example/redirect2",
+    ]
