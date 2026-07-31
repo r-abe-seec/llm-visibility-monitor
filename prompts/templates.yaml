@@ -1,9 +1,20 @@
 # Prompt templates for brand visibility measurement.
+#
 # Placeholders:
 #   {industry} - the industry / service category (required)
 #   {target}   - your brand name (templates using it are skipped
 #                when no target is given)
+#
+# Tips:
+#   - For local businesses, fold the area into industry when generating,
+#     e.g. industry="横浜の家族葬" — no separate placeholder is needed.
+#   - Categories are free-form; add your own journey stages as needed.
+#
+# Design note: informational questions rarely name companies on their own,
+# so journey templates append a light "which companies do you recommend"
+# nudge to elicit brand mentions while keeping the question realistic.
 templates:
+  # --- Brand visibility benchmarks (direct recommendation asks) ---
   - category: recommendation
     title: おすすめ企業
     text: "{industry}でおすすめの会社を5社挙げ、それぞれの特徴を簡潔に説明してください。"
@@ -23,3 +34,20 @@ templates:
   - category: reputation
     title: 評判
     text: "{target}の評判や強み・弱みについて、客観的に説明してください。"
+
+  # --- Customer journey stages (realistic user questions) ---
+  - category: journey_urgent
+    title: 緊急時の行動
+    text: "身内が亡くなりました。まず何をすべきか順を追って教えてください。{industry}はどう選べばよいか、信頼できる会社があればあわせて教えてください。"
+
+  - category: journey_cost
+    title: 費用相場
+    text: "{industry}の費用相場を教えてください。費用を抑えるコツと、料金が明確で信頼できる会社があれば教えてください。"
+
+  - category: journey_flow
+    title: 利用の流れ
+    text: "{industry}に依頼してから当日までの流れを教えてください。初めてでも安心して任せられる会社があれば教えてください。"
+
+  - category: journey_trust
+    title: 失敗回避
+    text: "{industry}選びで後悔・失敗しないための注意点を教えてください。そのうえで評判の良い会社を挙げてください。"
