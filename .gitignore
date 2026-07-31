@@ -20,3 +20,5 @@ __pycache__/
 data/results/
 .coverage
 coverage.xml
+
+prompts/brands.local.yaml

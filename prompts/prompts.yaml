@@ -1,15 +1,33 @@
 prompts:
-  - id: hello_japanese
-    category: test
-    title: 日本語の挨拶
-    text: 日本語で短く挨拶してください。
-
-  - id: recommend_ad_agencies
-    category: brand_visibility
-    title: おすすめの広告代理店
-    text: 日本国内でおすすめの広告代理店を5社挙げ、それぞれの特徴を簡潔に説明してください。
-
-  - id: recommend_ga4_agencies
-    category: brand_visibility
-    title: GA4に強い会社
-    text: 日本国内でGA4の導入や分析支援に強い会社を5社挙げてください。
+- id: hello_japanese
+  category: test
+  title: 日本語の挨拶
+  text: 日本語で短く挨拶してください。
+- id: recommend_ad_agencies
+  category: brand_visibility
+  title: おすすめの広告代理店
+  text: 日本国内でおすすめの広告代理店を5社挙げ、それぞれの特徴を簡潔に説明してください。
+- id: recommend_ga4_agencies
+  category: brand_visibility
+  title: GA4に強い会社
+  text: 日本国内でGA4の導入や分析支援に強い会社を5社挙げてください。
+- id: gen_recommendation
+  category: recommendation
+  title: おすすめ企業
+  text: 葬儀社でおすすめの会社を5社挙げ、それぞれの特徴を簡潔に説明してください。
+- id: gen_ranking
+  category: ranking
+  title: 主要企業ランキング
+  text: 葬儀社の主要な会社を、評価が高い順にランキング形式で5社紹介してください。
+- id: gen_selection
+  category: selection
+  title: 選び方とおすすめ
+  text: 葬儀社を選ぶ際のポイントを説明したうえで、具体的におすすめの会社を挙げてください。
+- id: gen_comparison
+  category: comparison
+  title: 競合比較
+  text: 花葬儀と競合する葬儀社を3社挙げ、それぞれの強み・弱みを花葬儀と比較してください。
+- id: gen_reputation
+  category: reputation
+  title: 評判
+  text: 花葬儀の評判や強み・弱みについて、客観的に説明してください。
